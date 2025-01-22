@@ -103,7 +103,8 @@ class UserController extends Controller
             }
     }
     function ResetPassword(Request $request){
-        try{
+        try{ 
+           
             $email = $request->header('email');
             $password = $request->input('password');
             User::where('email','=',$email)->update(['password'=>$password]);
