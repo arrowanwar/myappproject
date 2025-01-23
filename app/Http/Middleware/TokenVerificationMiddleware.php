@@ -16,6 +16,7 @@ class TokenVerificationMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
+        // dd($request);
         $token = $request->cookie('token');
         $result = JWTTocken::DecodeToken($token);
         if($result == "unauthorized"){
@@ -24,6 +25,7 @@ class TokenVerificationMiddleware
         else{
             $request->headers->set('email', $result->userEmail);
             $request->headers->set('userID', $result->userID);
+            
             return $next($request);
 
         }

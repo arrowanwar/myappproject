@@ -85,7 +85,7 @@ class UserController extends Controller
         $otp = $request->input('otp');
         $count = User::where('email','=',$email)
             ->where('otp','=',$otp)->count();
-            if($count == 1){
+             if($count == 1){
                 User::where('email','=',$email)->update(['otp'=>'0']);
                 $token = JWTTocken::CreateTokenForSettingPassword($request->input('email'));
                 // return response()->json([$token]);
@@ -112,6 +112,7 @@ class UserController extends Controller
             return response()->json([
                 'status'=>'success',
                 'message'=>'Request Successful',
+                'email'=>$email,
                 ],);
         }
         catch(Exception $e){
@@ -145,7 +146,8 @@ class UserController extends Controller
     
             return response()->json([
                 'status'=>'success',
-                'message'=>'Request Successful'
+                'message'=>'Request Successful',
+                'email'=> $email
             ],);
             }
             catch(Exception $e){
