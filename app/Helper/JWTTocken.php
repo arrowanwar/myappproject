@@ -31,7 +31,7 @@ class JWTTocken
         ];
         return JWT::encode($payload,$key,'HS256');
     }
-    public static function VerifyToken($token){
+    public static function DecodeToken($token){
         try{
             if($token == null){
                 return 'unauthorized';

@@ -80,7 +80,7 @@ class UserController extends Controller
         }
     }
     function VerifyOTP(Request $request){
-        
+        // dd($request);
         $email = $request->input('email');
         $otp = $request->input('otp');
         $count = User::where('email','=',$email)
@@ -104,8 +104,9 @@ class UserController extends Controller
     }
     function ResetPassword(Request $request){
         try{ 
-           
+            
             $email = $request->header('email');
+            
             $password = $request->input('password');
             User::where('email','=',$email)->update(['password'=>$password]);
             return response()->json([

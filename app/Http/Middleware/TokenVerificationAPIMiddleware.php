@@ -18,13 +18,13 @@ class TokenVerificationAPIMiddleware
     {
       
         $token = $request->header('token');   
-        $result = JWTTocken::VerifyToken($token);
+        $result = JWTTocken::DecodeToken($token);
         if($result == "unauthorized"){
             return response()->json(['message' => 'unauthorized'], 401);
         }
         else{
             $request->headers->set('email', $result->userEmail);
-            $request->headers->set('id', $result->userID);
+            $request->headers->set('userID', $result->userID);
             return $next($request);
 
         }
