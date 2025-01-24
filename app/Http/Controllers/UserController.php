@@ -39,6 +39,9 @@ class UserController extends Controller
         
     }
     function UserLogIn(Request $request){
+        $email = $request->input('email');
+        $password = $request->input('password');
+
         $count = User::where('email','=',$request->input('email'))
         ->where('password','=',$request->input('password'))->select('id')->first();
         if($count !== null){

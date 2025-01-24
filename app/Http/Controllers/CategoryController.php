@@ -12,6 +12,7 @@ class CategoryController extends Controller
         return Category::where('id', $user_id)->get();
     }
     function CategoryCreate(Request $request){
+        // dd($request->all());
         $user_id = $request->header('userID');
         return Category::create([
             'name'=> $request->input('name'),
