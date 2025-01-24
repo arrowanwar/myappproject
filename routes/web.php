@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\TokenVerificationMiddleware;
@@ -17,3 +18,11 @@ Route::post('/reset-password',[UserController::class,'ResetPassword'])->name('Re
 Route::get('/userprofile',[UserController::class,'UserProfile'])->name('userprofile')->middleware([TokenVerificationMiddleware::class]);
 Route::post('/updateprofile',[UserController::class,'UpdateProfile'])->name('updateprofile')->middleware([TokenVerificationMiddleware::class]);
 
+//Cat
+Route::post('/create-category',[CategoryController::class,'CategoryCreate'])->name('CategoryCreate')->middleware([TokenVerificationMiddleware::class]);
+Route::get('/list-category',[UserController::class,'CategoryList'])->name('CategoryList')->middleware([TokenVerificationMiddleware::class]);
+Route::get('/delete-category',[UserController::class,'CategoryDelete'])->name('CategoryDelete')->middleware([TokenVerificationMiddleware::class]);
+Route::get('/update-category',[UserController::class,'CategoryUpdate'])->name('CategoryUpdate')->middleware([TokenVerificationMiddleware::class]);
+Route::get('/category-by-id',[UserController::class,'CategoryById'])->name('CategoryById')->middleware([TokenVerificationMiddleware::class]);
+
+//1:18 pause time
