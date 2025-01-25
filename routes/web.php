@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
 Route::get('/', function () {
@@ -25,4 +26,9 @@ Route::post('/delete-category',[CategoryController::class,'CategoryDelete'])->na
 Route::post('/update-category',[CategoryController::class,'CategoryUpdate'])->name('CategoryUpdate')->middleware([TokenVerificationMiddleware::class]);
 Route::get('/category-by-id',[CategoryController::class,'CategoryById'])->name('CategoryById')->middleware([TokenVerificationMiddleware::class]);
 
-//1:18 pause time
+//cus
+Route::post('/create-customer',[CustomerController::class,'CustomerCreate'])->name('CustomerCreate')->middleware([TokenVerificationMiddleware::class]);
+Route::get('/list-customer',[CustomerController::class,'CustomerList'])->name('CustomerList')->middleware([TokenVerificationMiddleware::class]);
+Route::post('/delete-customer',[CustomerController::class,'CustomerDelete'])->name('CustomerDelete')->middleware([TokenVerificationMiddleware::class]);
+Route::post('/update-customer',[CustomerController::class,'CustomerUpdate'])->name('CustomerUpdate')->middleware([TokenVerificationMiddleware::class]);
+Route::get('/customer-by-id',[CustomerController::class,'CustomerById'])->name('CustomerById')->middleware([TokenVerificationMiddleware::class]);
