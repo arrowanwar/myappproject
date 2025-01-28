@@ -11,7 +11,7 @@ class ProductController extends Controller
     
     function ProductList(Request $request){
         $user_id = $request->header('userID');
-        return Product::where('id', $user_id)->get();
+        return Product::where('user_id', $user_id)->get();
     }
     function CreateProduct(Request $request){
         // dd($request->all());
@@ -33,8 +33,8 @@ class ProductController extends Controller
     }
     function ProductById(Request $request){
         $user_id = $request->header('userID');
-        $customer_id = $request->input('id');
-        return Product::where('id', $customer_id)->where('user_id', $user_id)->first();
+        $id = $request->input('id');
+        return Product::where('id', $id)->where('user_id', $user_id)->first();
     }
     function UpdateProduct(Request $request){
 
