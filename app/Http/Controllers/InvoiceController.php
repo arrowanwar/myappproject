@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\InvoiceProduct;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -30,9 +31,18 @@ class InvoiceController extends Controller
                 'customer_id'=> $customer_id
                 ]);
 
-            $invoice_id = $invoice->id;
+            $invoiceId = $invoice->id;
             $products = $request->input('products');
+            foreach($products as $eachProduct){
+                InvoiceProduct::create([
+                    'invoiceId'=> $invoiceId,
+                    'user_id' => $user_id,
+                    'product_id' => $eachProduct['product_id'],
+                    'qty'=>$eachProduct['qty'],
+                    'sale_price'=>$eachProduct['sale_price'],
 
+                ]); 
+            }
 
             DB::commit();
             return 1;
@@ -43,6 +53,10 @@ class InvoiceController extends Controller
             return 0;
 
         }
+    }
+    function InvoiceSelect(Request $request){
+        $user_id = $request->header('id');
+        return Invoice::where('user_id', $user_id)->with('customer')->get();
     }
 }
 
