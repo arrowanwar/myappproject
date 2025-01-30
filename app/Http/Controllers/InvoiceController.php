@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Invoice;
 use App\Models\InvoiceProduct;
 use Exception;
@@ -57,6 +58,12 @@ class InvoiceController extends Controller
     function InvoiceSelect(Request $request){
         $user_id = $request->header('id');
         return Invoice::where('user_id', $user_id)->with('customer')->get();
+    }
+    function InvoiceDetail(Request $request){  
+        $user_id = $request->header('id');
+        $customerDetails = Customer::where('user_id', $user_id)->where('id', $request->input('cus_id'))->first();
+        $invoiceToal = Invoice::where('user_id', $user_id)->where('id', $request->input('inv_id'))->first();       
+        // $invoiceProduct = InvoiceProduct::where('user_id', $user_id)->where(
     }
 }
 
