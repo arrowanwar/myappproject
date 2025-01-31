@@ -63,7 +63,31 @@ class InvoiceController extends Controller
         $user_id = $request->header('id');
         $customerDetails = Customer::where('user_id', $user_id)->where('id', $request->input('cus_id'))->first();
         $invoiceToal = Invoice::where('user_id', $user_id)->where('id', $request->input('inv_id'))->first();       
-        // $invoiceProduct = InvoiceProduct::where('user_id', $user_id)->where(
+        $invoiceProduct = InvoiceProduct::where('invoice_id', $request->input('inv_id'))
+            ->where('user_id', $user_id)->with('product')
+            ->get();
+        return array(
+            'customer'=> $invoiceToal,
+            'invoice'=> $invoiceProduct,
+            'customerDetails'=> $customerDetails,
+        );
+    }
+    function InvoiceDelete(Request $request){
+        DB::beginTransaction();
+        try{
+        $user_id = $request->header('id');
+        InvoiceProduct::where('invoice_id', $request->input('inv_id'))
+        ->where('user_id', $user_id)
+        ->delete();
+
+        Invoice::where('id', $request->input('inv_id'))->delete();
+        DB::commit();
+        return 1;
+        }
+        catch(\Exception $e){
+            DB::rollBack();
+            return 0;
+        }
     }
 }
 

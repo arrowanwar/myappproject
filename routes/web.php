@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\InvoiceProductController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
 Route::get('/', function () {
@@ -41,3 +43,10 @@ Route::get('/delete-product',[ProductController::class,'DeleteProduct'])->name('
 Route::post('/list-product',[ProductController::class,'ProductList'])->name('ProductList')->middleware([TokenVerificationMiddleware::class]);
 Route::post('/update-product',[ProductController::class,'UpdateProduct'])->name('UpdateProduct')->middleware([TokenVerificationMiddleware::class]);
 Route::get('/product-by-id',[ProductController::class,'ProductById'])->name('ProductById')->middleware([TokenVerificationMiddleware::class]);
+
+//Invoice
+
+Route::post('/InvoiceCreate',[InvoiceController::class, 'InvoiceCreate'] )->name('InvoiceCreate')->middleware([TokenVerificationMiddleware::class]);  
+Route::get('/InvoiceSelect', [InvoiceController::class,'InvoiceSelect'])->name('InvoiceSelect')->middleware([TokenVerificationMiddleware::class]);  
+Route::post('/InvoiceDetail', [InvoiceController::class,'InvoiceDetail'])->name('InvoiceDetail')->middleware([TokenVerificationMiddleware::class]);  
+Route::post('/InvoiceDelete', [InvoiceController::class,'InvoiceDelete'])->name('InvoiceDelete')->middleware([TokenVerificationMiddleware::class]);  
