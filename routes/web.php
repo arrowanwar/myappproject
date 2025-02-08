@@ -9,9 +9,9 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceProductController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::post('/reg',[UserController::class,'UserRegistration'])->name('UserRegistration');
 Route::post('/login',[UserController::class,'UserLogIn'])->name('login');

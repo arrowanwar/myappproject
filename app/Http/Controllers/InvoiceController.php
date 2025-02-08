@@ -36,7 +36,7 @@ class InvoiceController extends Controller
             $products = $request->input('products');
             foreach($products as $eachProduct){
                 InvoiceProduct::create([
-                    'invoiceId'=> $invoiceId,
+                    'invoice_id'=> $invoiceId,
                     'user_id' => $user_id,
                     'product_id' => $eachProduct['product_id'],
                     'qty'=>$eachProduct['qty'],
@@ -51,7 +51,7 @@ class InvoiceController extends Controller
         }
         catch(Exception $e){
             DB::rollBack();
-            return 0;
+            return $e->getMessage();
 
         }
     }
