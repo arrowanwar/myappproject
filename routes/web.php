@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\InvoiceController;
@@ -50,3 +52,10 @@ Route::post('/InvoiceCreate',[InvoiceController::class, 'InvoiceCreate'] )->name
 Route::get('/InvoiceSelect', [InvoiceController::class,'InvoiceSelect'])->name('InvoiceSelect')->middleware([TokenVerificationMiddleware::class]);  
 Route::post('/InvoiceDetail', [InvoiceController::class,'InvoiceDetail'])->name('InvoiceDetail')->middleware([TokenVerificationMiddleware::class]);  
 Route::post('/InvoiceDelete', [InvoiceController::class,'InvoiceDelete'])->name('InvoiceDelete')->middleware([TokenVerificationMiddleware::class]);  
+
+//Summery
+
+Route::get('/summery',[DashboardController::class,'summery'])->name('DashboardController')->middleware([TokenVerificationMiddleware::class]);
+
+//Vue
+Route::get('/',[HomeController::class,'HomePage'])->name('HomePage');
