@@ -1,9 +1,10 @@
-<template>
-
-</template>
-
-<script setup>
+<script setup lang="ts">
+import NavLayout from '../Components/Layout/NavLayout.vue';
+import RegistrationForm from '../Components/User/RegistrationForm.vue'
 </script>
 
-<style scoped>
-</style>
+<template>
+    <NavLayout>
+        <RegistrationForm/>
+    </NavLayout>
+</template>

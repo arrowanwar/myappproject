@@ -11,9 +11,13 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\InvoiceProductController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+//Vue
+Route::get('/',[HomeController::class,'HomePage'])->name('HomePage');
+Route::get('/LoginPage',[UserController::class,'LoginPage'])->name('LoginPage');
+Route::get('/RegistrationPage',[UserController::class,'RegistrationPage'])->name('RegistrationPage');
+Route::get('/ResetPasswordPage',[UserController::class,'ResetPasswordPage'])->name('ResetPasswordPage');
+Route::get('/SendOtpPage',[UserController::class,'SendOtpPage'])->name('SendOtpPage');
+Route::get('/VerifyOtpPage',[UserController::class,'VerifyOtpPage'])->name('VerifyOtpPage');
 
 Route::post('/reg',[UserController::class,'UserRegistration'])->name('UserRegistration');
 Route::post('/login',[UserController::class,'UserLogIn'])->name('login');
@@ -57,5 +61,3 @@ Route::post('/InvoiceDelete', [InvoiceController::class,'InvoiceDelete'])->name(
 
 Route::get('/summery',[DashboardController::class,'summery'])->name('DashboardController')->middleware([TokenVerificationMiddleware::class]);
 
-//Vue
-Route::get('/',[HomeController::class,'HomePage'])->name('HomePage');

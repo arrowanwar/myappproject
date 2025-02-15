@@ -1,0 +1,9 @@
+vue js packages:
+- npm i @meforma/vue-toaster
+- npm i @vueup/vue-quill
+- npm i bootstrap
+- npm i chart.js/ npm i vue-chartjs
+- npm i vue-content-loader
+- npm i vue3-circle-progress
+- npm i vue3-easy-data-table
+- npm i vue3-lottie
