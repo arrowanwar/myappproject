@@ -60,9 +60,17 @@ import { PhotoIcon, UserCircleIcon } from '@heroicons/vue/24/solid'
 import { ChevronDownIcon } from '@heroicons/vue/16/solid'
 import { Link, useForm, router } from '@inertiajs/vue3'
 const form = useForm({ email: "", name: "", mobile: "", password: "" })
+import { usePage } from '@inertiajs/vue3';  
+const page = usePage()
 function submit() {
   form.post("/reg", {onSuccess:()=>{
-    router.get("/LoginPage")
+    if(page.props.flash.status === true){
+      router.get("/LoginPage")
+    }
+    else{
+      alert(page.props.flash.message)
+    }
+    // 
   }})
 }
 </script>

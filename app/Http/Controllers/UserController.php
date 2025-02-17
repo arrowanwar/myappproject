@@ -53,16 +53,30 @@ class UserController extends Controller
                 "mobile" => $mobile,
                 "password" => $password,
             ]);
+            $data =[
+                'message'=>'Registration Successful',
+                'status'=>true, 
+                'error'=>''
+            ];
+            return redirect('RegistrationPage')->with($data);
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'User Registration successfully'
-            ], );
-        } catch (Exception $e) {
-            return response()->json([
-                'status' => 'failled',
-                'message' => $e->getMessage(),
-            ], );
+            // return response()->json([
+            //     'status' => 'success',
+            //     'message' => 'User Registration successfully'
+            // ], );
+        } 
+        catch (Exception $e) {
+            // return response()->json([
+            //     'status' => 'failled',
+            //     'message' => $e->getMessage(),
+            // ], );
+
+            $data =[
+                'message'=>'Registration Failed',
+                'status'=>false, 
+                'error'=>$e->getMessage()
+            ];
+            return redirect('RegistrationPage')->with($data);
         }
 
     }
