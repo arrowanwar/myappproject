@@ -58,7 +58,7 @@ class UserController extends Controller
                 'status'=>true, 
                 'error'=>''
             ];
-            return redirect('RegistrationPage')->with($data);
+            return redirect()->route('RegistrationPage')->with($data);
 
             // return response()->json([
             //     'status' => 'success',
@@ -76,10 +76,14 @@ class UserController extends Controller
                 'status'=>false, 
                 'error'=>$e->getMessage()
             ];
-            return redirect('RegistrationPage')->with($data);
+            return redirect()->route('RegistrationPage')->with($data);
         }
 
     }
+    /*
+    JWT token wise UserLogin Code
+    =============================
+    
     function UserLogIn(Request $request)
     {
         $email = $request->input('email');
@@ -99,6 +103,35 @@ class UserController extends Controller
                 'status' => 'failled',
                 'message' => 'unauthorized',
             ], );
+        }
+    }
+    */
+    /*
+    Session wise UserLogin Code
+    =============================
+    */
+    function UserLogIn(Request $request)
+    {
+   
+        $count = User::where('email', '=', $request->input('email'))
+            ->where('password', '=', $request->input('password'))->select('id')->first();
+        if ($count !== null) {
+            $email = $request->input('email');
+            $user_id = $count->id;
+            $request->session()->put('email', $email);
+            $request->session()->put('user_id', $user_id);
+            $data =[
+                'message'=>'Login Successful',
+                'status'=>true, 
+                'error'=>''
+            ];
+            return redirect()->route('DashbooardPage')->with($data);
+        } else {
+            $data =[
+                'message'=>'Login Fail',
+                'status'=>false
+            ];
+            return redirect()->route('LoginPage')->with($data);
         }
     }
     function LogOut()

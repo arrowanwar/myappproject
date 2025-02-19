@@ -37,7 +37,7 @@
                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
             </div>
           </div>
-          
+
           <div class="sm:col-span-4">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
             <input type="password" v-model="form.password" id="password" placeholder="••••••••"
@@ -60,17 +60,34 @@ import { PhotoIcon, UserCircleIcon } from '@heroicons/vue/24/solid'
 import { ChevronDownIcon } from '@heroicons/vue/16/solid'
 import { Link, useForm, router } from '@inertiajs/vue3'
 const form = useForm({ email: "", name: "", mobile: "", password: "" })
-import { usePage } from '@inertiajs/vue3';  
+import { usePage } from '@inertiajs/vue3';
 const page = usePage()
 function submit() {
-  form.post("/reg", {onSuccess:()=>{
-    if(page.props.flash.status === true){
-      router.get("/LoginPage")
-    }
-    else{
-      alert(page.props.flash.message)
-    }
-    // 
-  }})
+  if (form.email.length === 0) {
+    alert("Email Required")
+  }
+  else if (form.name.length === 0) {
+    alert("Name Required")
+  }
+  else if (form.mobile.length != 11) {
+    alert("11 digit Mobile Required")
+  }
+  else if (form.password.length === 0) {
+    alert("Password Required")
+  }
+  else {
+    form.post("/reg", {
+      onSuccess: () => {
+        if (page.props.flash.status === true) {
+          router.get("/LoginPage")
+        }
+        else {
+          alert(page.props.flash.message)
+        }
+        // 
+      }
+    })
+  }
+
 }
 </script>
